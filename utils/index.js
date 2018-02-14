@@ -41,7 +41,10 @@ function getRandMove (Board) {
     easySelec *= -1
   }
   easySelec = Math.round(easySelec)
-  return optionsFor[easySelec]
+  return {
+    row: optionsFor[easySelec].row,
+    col: optionsFor[easySelec].col
+  }
 }
 
 function changeRound(round) {
@@ -100,11 +103,12 @@ function getValidMove(Board) {
       winnningState = value
       winingBoard = moveIn
     }
-    //out
-    return moveIn
   })
-
-  return Map().set('winnningState', winnningState).set('deep', winingBoard)
+  
+  return {
+    row: winnningState.row,
+    col: winnningState.col
+  }
 }
 
 function clear(Board) {

@@ -20,16 +20,16 @@ function Layout(props) {
         <Text style={styles.textTo}>
            {`Blancas: ${props.blancas} - Negras: ${props.negras}`}
          </Text>
-        <View style={styles.button}>
-          <Button
-            onPress={props.restart}
-            title='Restart'
+         <View style={styles.button}>
+          <Button onPress={props.goBack}
+            title='Last state'
             color='#ABDBDf'
           />
         </View>
         <View style={styles.button}>
-          <Button onPress={props.goBack}
-            title='Last state'
+          <Button
+            onPress={props.restart}
+            title='Restart'
             color='#ABDBDf'
           />
         </View>
