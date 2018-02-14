@@ -67,6 +67,26 @@ function gameplay (state = initialState, action) {
     case 'Difficulty': {
       return state.set('Difficulty', action.payload)
     }
+    case 'NoMore': {
+        //sin negras! juega la IA!
+        if (nextState.get(negra) === 0) {
+
+        }
+
+      return state
+    }
+    case 'VALIDATEWINING': {
+      let  nextState = getLength(state)
+      if ((nextState.get(negra)+nextState.get(blanca)) === 8*8) {
+          lastState = []
+          if (nextState.get('negra') > nextState.get(blanca)) {
+            Alert.alert(`gana ${state.get('USERNAME')}`)
+          }else {
+            Alert.alert(`Pierde ${state.get('USERNAME')}`)
+          }
+          return getOneBoard()
+      }
+    }
     case 'IA': {
       let nextState =  clear(state)
       let moves = {}
@@ -88,10 +108,6 @@ function gameplay (state = initialState, action) {
         nextState = clear(nextState)
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
-        // sin negras! juega la IA!
-        // if (nextState.get(negra) === 0) {
-
-        // }
         return nextState
       }
       else {

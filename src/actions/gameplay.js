@@ -18,6 +18,12 @@ export function eat (row, col) {
   }
 }
 
+export function validateWining () {
+  return {
+    type: 'VALIDATEWINING'
+  }
+}
+
 export function goBack()  {
   return {
     type: 'GO_BACK'

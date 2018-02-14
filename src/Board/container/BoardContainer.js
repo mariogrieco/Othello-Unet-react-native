@@ -50,6 +50,8 @@ class BoardContainer extends Component {
       timer.setTimeout(this, 'PC PLAY', () => {
         this.props.actions.IA()
       }, 750)
+
+      this.props.actions.validateWining()
     }
   }
 
