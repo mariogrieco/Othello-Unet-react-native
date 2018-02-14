@@ -115,16 +115,8 @@ function gameplay (state = initialState, action) {
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
       }  
-      if ((nextState.get(negra)+nextState.get(blanca)) === 8*8) {
-        lastState = []
-        if (nextState.get('negra') > nextState.get(blanca)) {
-          Alert.alert(`Gana ${state.get('USERNAME')}`)
-        }else {
-          Alert.alert(`Pierde ${state.get('USERNAME')}`)
-          Alert.alert(`Gana PC`)
-        }
-        return getOneBoard()
-      } else if ((!getIsNot(nextState))) {
+
+      if ((!getIsNot(nextState))) {
         Alert.alert(`${state.get('USERNAME')} sin jugadas`)
         while (!getIsNot(nextState)) {
           nextState = clear(nextState)
@@ -147,6 +139,18 @@ function gameplay (state = initialState, action) {
           }
         }
       }
+
+      if ((nextState.get(negra)+nextState.get(blanca)) === 8*8) {
+        // lastState = []
+        if (nextState.get('negra') > nextState.get(blanca)) {
+          Alert.alert(`Gana ${state.get('USERNAME')}`)
+        }else {
+          Alert.alert(`Pierde ${state.get('USERNAME')}`)
+          Alert.alert(`Gana PC`)
+        }
+        return getOneBoard()
+      }
+
       return nextState
     }
     default: {
