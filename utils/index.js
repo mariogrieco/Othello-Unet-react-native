@@ -562,6 +562,20 @@ function validate(Board, chip_name_a = blanca, chip_name_b = negra) {
   return result
 }
 
+function getIsNot (Board) {
+  let size = Board.get('size')
+  let state = Board.get('state')
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+        if (state.getIn([row, col]) === canMove) {
+          return true
+        }
+    }
+  }
+
+  return false
+}
+
 module.exports = {
   initialize,
   printState,
@@ -577,5 +591,6 @@ module.exports = {
   negra,
   canMove,
   setIn,
+  getIsNot,
   getRandMove
 }

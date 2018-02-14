@@ -12,7 +12,8 @@ import {
   getRandMove,
   blanca,
   canMove,
-  negra
+  negra,
+  getIsNot
 } from '../../utils'
 import { Alert } from 'react-native'
 
@@ -86,14 +87,13 @@ function gameplay (state = initialState, action) {
             Alert.alert(`Pierde ${state.get('USERNAME')}`)
             Alert.alert(`Gana PC`)
           }
-          return getOneBoard()
+          return getOneBoard().set('USERNAME', state.get('USERNAME'))
       }
     }
     case 'IA': {
       let nextState =  clear(state)
       let moves = {}
       nextState = validate(nextState, blanca, negra)
-      
       if (state.get('Difficulty') === 1) {
         moves = getRandMove(nextState)
       }
@@ -109,23 +109,44 @@ function gameplay (state = initialState, action) {
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
       }
-      else {
+      else if (!moves) {
         Alert.alert('PC sin movimientos!')
         nextState = clear(nextState)
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
-      }
+      }  
       if ((nextState.get(negra)+nextState.get(blanca)) === 8*8) {
-          lastState = []
-          if (nextState.get('negra') > nextState.get(blanca)) {
-            Alert.alert(`Gana ${state.get('USERNAME')}`)
-          }else {
-            Alert.alert(`Pierde ${state.get('USERNAME')}`)
-            Alert.alert(`Gana PC`)
+        lastState = []
+        if (nextState.get('negra') > nextState.get(blanca)) {
+          Alert.alert(`Gana ${state.get('USERNAME')}`)
+        }else {
+          Alert.alert(`Pierde ${state.get('USERNAME')}`)
+          Alert.alert(`Gana PC`)
+        }
+        return getOneBoard()
+      } else if ((!getIsNot(nextState))) {
+        Alert.alert(`${state.get('USERNAME')} sin jugadas`)
+        while (!getIsNot(nextState)) {
+          nextState = clear(nextState)
+          nextState = validate(nextState, blanca, negra)
+          nextState = getLength(nextState)
+          let moves = state.get('Difficulty') === 1 ? getRandMove(nextState) : getValidMove(nextState);
+          nextState = clear(state)
+          if (moves !== false && nextState.getIn(['state', moves.row, moves.col]) === canMove) {
+            nextState = nextState.setIn(['state', moves.row, moves.col], blanca)
+            nextState = eat(nextState, moves.row, moves.col, blanca)
+            nextState = clear(nextState)
+            nextState = validate(nextState, negra, blanca)
+            nextState = getLength(nextState)
           }
-          return getOneBoard()
+          else {
+            nextState = clear(nextState)
+            nextState = validate(nextState, negra, blanca)
+            nextState = getLength(nextState)
+            break;
+          }
+        }
       }
-
       return nextState
     }
     default: {
