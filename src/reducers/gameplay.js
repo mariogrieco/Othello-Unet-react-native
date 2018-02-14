@@ -9,6 +9,7 @@ import {
   getValidMove,
   clearOption,
   printState,
+  getRandMove,
   blanca,
   canMove,
   negra
@@ -63,23 +64,42 @@ function gameplay (state = initialState, action) {
     case 'RESET': {
       return validate(getOneBoard().set('USERNAME', state.get('USERNAME')), negra, blanca)
     }
+    case 'Difficulty': {
+      return state.set('Difficulty', action.payload)
+    }
     case 'IA': {
-      let nextState = clear(state)
+      let nextState =  clear(state)
+      let moves = {}
       nextState = validate(nextState, blanca, negra)
-      let moves = getValidMove(nextState)
-      moves = moves.get('winnningState')
-      // // validar cuando no tienen mas movimientos
-     if (nextState.getIn(['state', moves['row'], moves['col']]) === canMove) {
+      if (state.get('Difficulty') === 1) {
+        let that = getRandMove(nextState)
+        moves['row'] = that.row
+        moves['col'] = that.col
+      }
+      else {
+        moves = getValidMove(nextState)
+        moves = moves.get('winnningState')
+      }
+        // // validar cuando no tienen mas movimientos
+      if (moves && nextState.getIn(['state', moves['row'], moves['col']]) === canMove) {
         nextState = clear(state)
         nextState = nextState.setIn(['state', moves['row'], moves['col']], blanca)
         nextState = eat(nextState, moves['row'], moves['col'], blanca)
         nextState = clear(nextState)
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
+        // sin negras! juega la IA!
+        // if (nextState.get(negra) === 0) {
+
+        // }
         return nextState
       }
       else {
-        Alert.alert('false move')
+        Alert.alert('PC sin movimientos!')
+        nextState = clear(nextState)
+        nextState = validate(nextState, negra, blanca)
+        nextState = getLength(nextState)
+        return nextState
       }
     }
     default: {

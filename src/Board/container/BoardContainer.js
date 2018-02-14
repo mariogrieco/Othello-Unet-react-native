@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
   Dimensions,
   Button,
   TouchableHighlight
@@ -50,7 +49,7 @@ class BoardContainer extends Component {
       // this.props.actions.clear()
       timer.setTimeout(this, 'PC PLAY', () => {
         this.props.actions.IA()
-      }, 500)
+      }, 750)
     }
   }
 
@@ -63,7 +62,7 @@ class BoardContainer extends Component {
     let height = Dimensions.get('window').height
 
     let size = this.getSize(width, height)
-    size = size-5
+    size = size-8
 
     let rows = new Array(this.props.size).fill(0)
     let cols = new Array(this.props.size).fill(0)
@@ -78,7 +77,6 @@ class BoardContainer extends Component {
         username={this.props.username} 
         blancas={countB} 
         negras={countN}>
-        <ScrollView>
         {
           rows.map((row, rowKey) => {
             return (
@@ -119,7 +117,6 @@ class BoardContainer extends Component {
             )
           })
         }
-        </ScrollView>
       </Layout>
     )
   }

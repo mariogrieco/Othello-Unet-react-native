@@ -7,26 +7,33 @@ import {
   TouchableHighlight
 } from 'react-native'
 
-function Layout (props) {
+function Layout(props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {`${props.username} vs Computer`} 
-      </Text>
-       <Button 
-         style={styles.button}
-         onPress={props.restart}
-          title='Restart'
-          color='#ABDBDf'
-        />
-        <Button onPress={props.goBack}
-          title='Last state'
-          color='#ABDBDf'
-        />
-      <Text style={styles.textTo}>
-        {`Blancas: ${props.blancas} - Negras: ${props.negras}`} 
-      </Text>
+       <View>
+         <Text style={styles.title}>
+            {`${props.username} vs Computer`}
+          </Text>
+       </View>
       {props.children}
+      <View style={styles.subcontainer}>
+        <Text style={styles.textTo}>
+           {`Blancas: ${props.blancas} - Negras: ${props.negras}`}
+         </Text>
+        <View style={styles.button}>
+          <Button
+            onPress={props.restart}
+            title='Restart'
+            color='#ABDBDf'
+          />
+        </View>
+        <View style={styles.button}>
+          <Button onPress={props.goBack}
+            title='Last state'
+            color='#ABDBDf'
+          />
+        </View>
+      </View>
     </View>
   )
 }
@@ -35,18 +42,21 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1  
+    flex: 1
   },
   textTo: {
     color: 'white'
   },
   title: {
-    fontSize: 25,
+    fontSize: 29,
     color: '#f6f6f6',
-    padding: 25
+    padding: 30
+  },
+  subcontainer: {
+    margin: 5
   },
   button: {
-    marginBottom: 10
+    margin: 10
   }
 })
 

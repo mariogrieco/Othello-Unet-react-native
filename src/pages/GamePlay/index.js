@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, ImageBackground } from 'react-native'
+import { StyleSheet, View, Text, ImageBackground, ScrollView } from 'react-native'
 import BoardContainer from '../../Board/container/BoardContainer'
 
 class GamePlay extends Component {
@@ -9,22 +9,24 @@ class GamePlay extends Component {
     blancas: 0,
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <ImageBackground
           style={styles.ImageBackground}
           source={require('../../../assets/images/wallpaper-menu-optimized.jpg')}
-          >      
-          </ImageBackground>
+        >
+        </ImageBackground>
         <Text>GamePlay</Text>
-        <BoardContainer />
+        <ScrollView>
+          <BoardContainer />
+        </ScrollView>
       </View>
     )
   }
 }
 
-let styles  = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     display: 'flex',
     width: '100%',

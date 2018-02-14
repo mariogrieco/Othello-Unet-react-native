@@ -25,16 +25,22 @@ function getRandMove (Board) {
   for (let row = 0; row < size; row++) {
     for (let col = 0; col < size; col++) {
       if (state.getIn([row, col]) === canMove) {
-        optionsFor.push({ row, col })
+        optionsFor.push({
+          row, 
+          col
+        })
       }
     }
   }
-
   if (optionsFor.length === 0) {
     return false
   }
-  
-  let easySelec =  ((Math.random() * (optionsFor.length*2)) % optionsFor.length - 1 )
+
+  let easySelec = Math.random() * (optionsFor.length) % optionsFor.length - 1
+  if (easySelec < 0) {
+    easySelec *= -1
+  }
+  easySelec = Math.round(easySelec)
   return optionsFor[easySelec]
 }
 
@@ -64,7 +70,7 @@ function getValidMove(Board) {
   }
 
   if (optionsFor.length === 0) {
-    return Map().set('winnningState', false).set('deep', false)
+    return false
   }
 
   let tempState = optionsFor.forEach((value) => {
@@ -566,5 +572,6 @@ module.exports = {
   blanca,
   negra,
   canMove,
-  setIn
+  setIn,
+  getRandMove
 }
