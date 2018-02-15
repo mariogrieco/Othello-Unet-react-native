@@ -1,5 +1,8 @@
 {
   "expo": {
     "sdkVersion": "25.0.0"
-  }
+  },
+  "name": "Othello",
+  "displayName": "Othello",
+  "icon": "app-icon.png"
 }
