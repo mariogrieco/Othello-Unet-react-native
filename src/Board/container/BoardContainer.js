@@ -61,7 +61,7 @@ class BoardContainer extends Component {
     let height = Dimensions.get('window').height
 
     let size = this.getSize(width, height)
-    size = size-8
+    size = size-4
 
     let rows = new Array(this.props.size).fill(0)
     let cols = new Array(this.props.size).fill(0)

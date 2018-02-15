@@ -48,15 +48,15 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   title: {
-    fontSize: 29,
+    fontSize: 20,
     color: '#f6f6f6',
-    padding: 30
+    padding: 25
   },
   subcontainer: {
     margin: 5
   },
   button: {
-    margin: 10
+    margin: 5
   }
 })
 
