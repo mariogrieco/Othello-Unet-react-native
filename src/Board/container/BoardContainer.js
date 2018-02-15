@@ -45,9 +45,9 @@ class BoardContainer extends Component {
   moveHandle = (rowKey, colKey) => {
     if (this.props.BoardState.getIn([rowKey, colKey]) === canMove) {
       this.props.actions.move(rowKey, colKey)
-      this.props.actions.IA()
       // timer.setTimeout(this, 'PC PLAY', () => {
-      // }, 150)
+        this.props.actions.IA()
+      // }, 200)
       // this.props.actions.validateWining()
     }
   }

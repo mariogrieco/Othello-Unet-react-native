@@ -4,5 +4,5 @@
   },
   "name": "Othello",
   "displayName": "Othello",
-  "icon": "app-icon.png"
+   "icon": "./app-icon.png"
 }

@@ -108,6 +108,13 @@ function gameplay(state = initialState, action) {
         nextState = clear(nextState)
         nextState = validate(nextState, negra, blanca)
         nextState = getLength(nextState)
+      }
+      else if (!moves) {
+        Alert.alert('PC sin movimientos!')
+        nextState = clear(nextState)
+        nextState = validate(nextState, negra, blanca)
+        nextState = getLength(nextState)
+      } else {
         if ((!getIsNot(nextState))) {
           Alert.alert(`${state.get('USERNAME')} sin jugadas`)
           while (!getIsNot(nextState)) {
@@ -131,12 +138,6 @@ function gameplay(state = initialState, action) {
             }
           }
         }
-      }
-      else if (!moves) {
-        Alert.alert('PC sin movimientos!')
-        nextState = clear(nextState)
-        nextState = validate(nextState, negra, blanca)
-        nextState = getLength(nextState)
       }
 
       nextState = clear(nextState)
